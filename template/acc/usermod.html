@@ -1,0 +1,50 @@
+{% extends 'base.html' %}  
+
+{% block auth %}  
+
+<style>
+    .ipu{
+        color:whitesmoke;
+    }
+</style>
+
+<div class="container my-5" style="color:whitesmoke;">
+    <div style="padding:5% 20%";>
+        <div class="my-5">
+            <h1>Modify your profile</h1>
+        </div>      
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %} 
+            <div>
+                ID : <input name="username" value="{{user.username}}" type="text" class="ipu form-control my-3" style="background-color: rgba(245, 245, 245, 0.213); ">
+            </div>
+            <div>
+                PW : <input name="password" type="password" class="ipu form-control my-3" style="background-color: rgba(245, 245, 245, 0.213); ">
+            </div>
+            <div>
+                Nickname : <input name="nickname" value="{{user.nickname}}" type="text" class="ipu form-control my-3" style="background-color: rgba(245, 245, 245, 0.213); "> 
+            </div>  
+            <div>
+                Email : <input name="email" value="{{user.email}}" type="email" class="ipu form-control my-3" style="background-color: rgba(245, 245, 245, 0.213); ">
+            </div>  
+            <div>
+                Comments : <textarea name="comment" class="ipu form-control my-3" style="background-color: rgba(245, 245, 245, 0.213); ">{{ user.comment }}</textarea>
+            </div>  
+            <div>
+                Photo : <input name="picture" type="file" class="form-control my-3" style="background-color: rgba(245, 245, 245, 0.213); ">
+            </div>  
+
+            <div class="text-end">
+                <a href="{% url 'acc:profile' %}"><button type="button" class="btn btn-outline-light my-3" style="margin-right: 1%;">Back</button></a>
+                <button class="btn btn-outline-light my-3">+Modify</button>
+            </div>
+            <!-- modify 버튼에 모달 넣기 -->
+
+        </form>
+    </div>
+
+</div>
+
+
+{% endblock %}  
+

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}  
+
+{% block auth %}  
+
+<style>
+    .ipu{
+        color:whitesmoke;
+    }
+    .box{
+        width: 150px;
+        height: 150px;
+        border-radius: 30%;
+        overflow: hidden;
+
+    }
+    .photo{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
+
+<!-- 이미지 둥글게 만들기 -->
+
+<div class="container my-5" style="color:whitesmoke;">
+    <div style="padding:5% 20%;";>
+        <div class="my-5">
+            <h1>my Profile</h1>
+        </div>
+      
+        <div class="box mb-5">
+            <img src="{{ user.getpic }}" class="photo">
+        </div>
+        
+        <div>
+            ID : <input name="username" disabled value="{{user.username}}" type="text" class="ipu form-control my-3" style="background-color: rgba(245, 245, 245, 0.213); ">
+        </div>
+        <div>
+            Nickname : <input name="nickname" disabled value="{{user.nickname}}" type="text" class="ipu form-control my-3" style="background-color: rgba(245, 245, 245, 0.213)"> 
+        </div>  
+        <div>
+            Email : <input name="email" type="email" disabled value="{{user.email}}" class="ipu form-control my-3" style="background-color: rgba(245, 245, 245, 0.213)">
+        </div>  
+        <div>
+            Comments : <textarea name="comment" disabled class="ipu form-control my-3" style="background-color: rgba(245, 245, 245, 0.213)">{{ user.comment }}</textarea>
+        </div>  
+
+        <div class="text-end">
+            <a href="{% url 'acc:index' %}"><button type="button" class="btn btn-outline-light my-3" style="margin-right: 1%;">Back</button></a>
+            <a href="{% url 'acc:usermod' %}"><button type="button" class="btn btn-outline-light my-3" style="margin-right: 1%;">+Modify</button></a>
+            <a href="{% url 'acc:userdel' %}"><button type="button" class="btn btn-outline-light my-3">Delete</button></a>
+            <!-- delete 모달 넣기 -->
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}

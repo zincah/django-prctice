@@ -1,0 +1,47 @@
+{% extends 'base.html' %}  
+
+
+{% block noauth %}  
+
+<div class="container my-5" style="color:whitesmoke;">
+    <div style="padding:5% 20%";>
+        <div class="my-5">
+            <h1>Join our Page</h1>
+        </div>      
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %} 
+            <div>
+                ID : <input name="username" type="text" class="form-control my-3" style="background-color: rgba(245, 245, 245, 0.467);">
+            </div>
+            <div>
+                PW : <input name="password" type="password" class="form-control my-3" style="background-color: rgba(245, 245, 245, 0.467);">
+            </div>
+            <div>
+                Nickname : <input name="nickname" type="text" class="form-control my-3" style="background-color: rgba(245, 245, 245, 0.467);"> 
+            </div>  
+            <div>
+                Email : <input name="email" type="email" class="form-control my-3" style="background-color: rgba(245, 245, 245, 0.467);">
+            </div>  
+            <div>
+                Comments : <textarea name="comment" class="form-control my-3" style="background-color: rgba(245, 245, 245, 0.467);"></textarea>
+            </div>  
+            <div>
+                Photo : <input name="picture" type="file" class="form-control my-3" style="background-color: rgba(245, 245, 245, 0.467);">
+            </div>  
+
+            <div class="text-end">
+                <a href="{% url 'acc:index' %}"><button type="button" class="btn btn-outline-light my-3" style="margin-right: 1%;">Back</button></a>
+                <button class="btn btn-outline-light my-3">+Create</button>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+
+
+
+
+
+{% endblock %}  
