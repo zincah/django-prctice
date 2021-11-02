@@ -1,0 +1,41 @@
+{% extends 'base.html' %}  
+
+{% block auth %} 
+
+<style>
+    body{
+        color:whitesmoke;
+    }
+</style>
+
+<body>
+    <div class="container my-5">
+        <div style="padding:10% 15%">
+            <div class="my-3">
+                <h1>Add your photo</h1>
+            </div>
+            <hr>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %} 
+                <div class="input-group mt-5 mb-5">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Upload</span>
+                    <input name="picture" type="file" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="input-group mb-5">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Content</span>
+                    <textarea name="content" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></textarea>
+                </div>
+                <div class="text-end">
+                    <button class="btn btn-outline-light" style="margin-right: 5px;">+ADD</button>
+                    <a href="{% url 'board:index' %}"><button type="button" class="btn btn-outline-light">Back</button></a>
+                </div>
+
+            </form>
+        </div>
+
+
+    </div>
+
+</body>
+
+{% endblock %}  

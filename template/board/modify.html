@@ -1,0 +1,38 @@
+{% extends 'base.html' %}  
+
+{% block auth %}  
+
+    <body style="color:whitesmoke">
+        <div class="container my-5">
+            <div class="mb-3">
+                <h1>{{ bo.writer }}</h1>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-lg-5">
+                    <div>
+                        <img src="{{ bo.picture.url }}" height="500px">
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div style="font-size: 20pt;">
+                            Content : 
+                            <textarea name="content" class="form-control my-3" style="background-color: rgba(245, 245, 245, 0.156); color:whitesmoke; height:400px">{{ bo.content }}</textarea>
+                        </div>
+                        <div class="text-end">
+                            <button class="btn btn-outline-light">Modify</button>
+                            <a href="{% url 'board:detail' bo.id %}"><button type="button" class="btn btn-outline-light">Back</button></a>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+
+
+        </div> 
+    </body>
+
+{% endblock %}  

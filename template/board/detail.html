@@ -1,0 +1,90 @@
+{% extends 'base.html' %} 
+
+{% block auth %} 
+
+<style>
+    body{
+        color:whitesmoke
+    }
+</style>
+
+<body>
+
+    <div class="container my-5">
+
+        <div class="mb-3">
+            <h1>{{ bo.writer }}</h1>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-lg-5">
+                <div>
+                    <img src="{{ bo.picture.url }}" height="500px">
+                </div>
+                <div class="text-end my-3" style="margin-right:30px">
+                    <a>like : {{ bo.like }} </a>
+                    <button class="btn" style="border-width: 0ch;">🤍</button>
+                    {% if bo.writer == user.username %}
+                    <a href="{% url 'board:modify' bo.id %}"><button class="btn btn-outline-light">Modify</button></a>
+                    <a href="{% url 'board:delete' bo.id %}"><button class="btn btn-outline-danger">Delete</button></a>
+                    {% else %}
+                    <button class="btn btn-outline-light">+Scrap</button>
+                    {% endif %}
+                    <a href="{% url 'board:index' %}"><button class="btn btn-outline-light">Back</button></a>
+                </div>
+
+
+            </div>
+            <div class="col-lg-7">
+                <div style="font-size: 20pt;">
+                    Content : 
+                    <textarea disabled class="form-control my-3" style="background-color: rgba(245, 245, 245, 0.156); color:whitesmoke; height:100px">{{ bo.content }}</textarea>
+                </div>
+                <div>
+                    <h4>Reply : </h4> 
+                    <hr>
+                    {% for i in rep %} 
+                        <div class="row my-3" style="font-size: larger;">
+                            <div class="col-2">
+                                {{ i.replyer }}
+                            </div>
+                            <div class="col-9">
+                                : {{ i.comment }}
+                            </div>
+                            <div class="col-1">
+                                {% if i.replyer == user.username %}
+                                <a href="{% url 'board:delete_rep' bo.id i.id %}"><button class="btn" style="border-width: 0ch;">❌</button></a>
+                                {% else %} 
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <hr>
+                    <form method="POST" action="{% url 'board:create_rep' bo.id %}">
+                        {% csrf_token %} 
+                        <div class="row">
+                            <div class="col-lg-10">
+                                <input name="comment" class="form-control my-3" style="background-color: rgba(245, 245, 245, 0.156); color:whitesmoke;">
+                            </div>
+                            <div class="col-lg-2" style="margin-top: 15px;">
+                                <button class="btn btn-outline-light">+ADD</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+
+
+    </div>
+
+</body>
+
+{% endblock %} 
+
+🖤

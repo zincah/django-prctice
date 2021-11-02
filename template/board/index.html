@@ -1,0 +1,79 @@
+{% extends 'base.html' %}  
+
+{% block noauth %}  
+
+<body>
+<div class="container my-5">
+    <div style="margin-top: 20%;">
+        <h3 class="text-center">pls join our website</h3>
+        <h3 class="text-center mt-3">if you join, you could see many nice things :)</h3>
+    </div>
+    <div class="text-center my-5">
+        <a href="{% url 'acc:signup' %}"><button class="btn btn-outline-success">Join</button></a>
+    </div>
+</div>
+</body>
+
+{% endblock %}  
+
+{% block auth %}  
+
+<style>
+
+    .box{
+        width: 30px;
+        height: 30px;
+        border-radius: 70%;
+        overflow: hidden;
+
+    }
+    .photo{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .box2{
+        width: 350px;
+    }
+
+</style>
+
+<body style="color:whitesmoke;">
+<div class="container my-5">
+    <div class="font-color">
+        <h3>Hi {{ user.username }}, i'm waiting for you~ </h3>
+        <div class="text-end">
+            <a href="{% url 'board:create' %}"><button class="btn btn-outline-light">+ADD</button></a>
+        </div>
+    </div>
+    
+
+    <div class="row my-5">
+        {% for i in bo %}
+        <div class="col-lg-4">
+            <div class="box2">
+                <div class="text-center">
+                    <a href="{%url 'board:detail' i.id %}"><img src="{{ i.picture.url }}" height="330px"></a>
+                </div>
+                <div class="row mt-3 mb-5">
+                    <div class="col-lg-2">
+                        <b>{{ i.writer }}</b>  
+                    </div>
+                    <div class="col-lg-10">
+                        : {{ i.summary }}
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+
+
+{% endblock %}  
+
+🤍
+

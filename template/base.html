@@ -22,7 +22,19 @@
             <div class="container-fluid">
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'acc:index' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{%url 'board:index' %}">Board</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'acc:profile' %}">my profile</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown mt-2" style="font-size: small;">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ user.username }}
@@ -34,16 +46,6 @@
                             <li><a class="dropdown-item" href="{% url 'acc:userlogout' %}">Log out</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{% url 'acc:index' %}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Board</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'acc:profile' %}">my profile</a>
-                        </li>
-
                     </ul>
                     <!--search버튼 나중에-->
                 </div>
@@ -60,7 +62,18 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item dropdown mt-2" style="font-size: small;">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{%url 'board:index' %}">Board</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'acc:userlogin' %}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'acc:signup' %}">Join</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="text-end nav-item dropdown mt-2" style="font-size: small;">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             hello~
                             </a>
@@ -71,16 +84,6 @@
                             <li><a class="dropdown-item" href="{% url 'acc:signup' %}">Join</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Board</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'acc:userlogin' %}">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'acc:signup' %}">Join</a>
-                        </li>
-
                     </ul>
                    
                 </div>
