@@ -9,10 +9,15 @@ from acc.models import User
 # Create your views here.
 
 def index(request):
+    page = request.GET.get('page', 1)
     b = Board.objects.all()
     b = b.order_by('-pubdate')
+
+    pag = Paginator(b, 6)
+    obj = pag.get_page(page)
+
     context = {
-        "bo" : b,
+        "blist" : obj,
     }
     return render(request, "board/index.html", context)
 
@@ -66,3 +71,13 @@ def modify(request, bpk):
         b.save()
         return redirect("board:index")
     return render(request, "board/modify.html", context)
+
+def addlike(request, bpk):
+    b = Board.objects.get(id=bpk)
+    b.like.add(request.user)
+    return redirect("board:detail", bpk=bpk)
+
+def dellike(request, bpk):
+    b = Board.objects.get(id=bpk)
+    b.like.remove(request.user)
+    return redirect("board:detail", bpk=bpk)

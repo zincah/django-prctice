@@ -6,14 +6,34 @@
     body{
         color:whitesmoke
     }
+
+    .box{
+        width: 70px;
+        height: 70px;
+        border-radius: 70%;
+        overflow: hidden;
+
+    }
+    .photo{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 </style>
 
 <body>
 
     <div class="container my-5">
 
-        <div class="mb-3">
-            <h1>{{ bo.writer }}</h1>
+        <div class="row mb-3">
+            <div class="col-lg-1">
+                <div class="box" style="margin-left: 13px;">
+                    <img src="{{ bo.wri_pic }}" class="photo">
+                </div>
+            </div>
+            <div class="col-lg-11">
+                <h1>{{ bo.writer }}</h1>
+            </div>
         </div>
         <hr>
         <div class="row">
@@ -22,8 +42,12 @@
                     <img src="{{ bo.picture.url }}" height="500px">
                 </div>
                 <div class="text-end my-3" style="margin-right:30px">
-                    <a>like : {{ bo.like }} </a>
-                    <button class="btn" style="border-width: 0ch;">🤍</button>
+                    <a>like : {{ bo.like.all.count }} </a>
+                    {% if user in bo.like.all %}
+                        <a href="{% url 'board:dellike' bo.id %}"><button class="btn" style="border-width: 0ch;">🖤</button></a>
+                    {% else %} 
+                        <a href="{% url 'board:addlike' bo.id %}"><button class="btn" style="border-width: 0ch;">🤍</button></a>
+                    {% endif %}
                     {% if bo.writer == user.username %}
                     <a href="{% url 'board:modify' bo.id %}"><button class="btn btn-outline-light">Modify</button></a>
                     <a href="{% url 'board:delete' bo.id %}"><button class="btn btn-outline-danger">Delete</button></a>
