@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'acc.apps.AccConfig',
     'board.apps.BoardConfig',
+    'book.apps.BookConfig',
 
     'mathfilters',
 ]

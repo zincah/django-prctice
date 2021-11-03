@@ -1,0 +1,77 @@
+{% extends 'base.html' %}  
+
+
+{% block auth %}  
+
+
+<div class="container my-5">
+    <div style="color:whitesmoke;">
+        <h1>Your BookMark</h1>
+        {% if book.count > 9 %}
+        <p style="color:red;">*you can't create bookmarks more than 10.</p>
+        {% endif %}
+    </div>
+    <div class="text-end">
+        {% if book.count < 10 %}
+        <button class="btn btn-outline-light" onclick="create()">+Bookmark</button>
+        {% endif %}
+    </div>
+    
+    <form method="POST" action="{% url 'book:create' %}">
+        {% csrf_token %}
+        <div id="book_create"></div>
+    </form>
+    
+    <div class="row my-5">
+        {% for i in book %}
+            {% if i.user.username == user.username %}
+                <div class="col-lg-11">
+                    <a href="{{ i.site_url }}" target="_blank">
+                        <div class="card" style="background-color: rgba(33, 37, 41); color:whitesmoke;">
+                            <div style="background-color: rgba(21, 23, 24, 0.59);">
+                                <div class="card-header">
+                                    # bookmark
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <blockquote class="blockquote mb-0">
+                                    <p>{{ i.site_name }} {% if i.impo == True %}🤍{% endif %}</p>
+                                    <footer class="blockquote-footer">{{ i.surl }}</footer>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-1">
+                    <div>
+                        {% if i.impo %}
+                        <a href="{% url 'book:uncheck' i.id %}"><button class="btn btn-outline-light">Reset!</button></a>
+                        {% else %} 
+                        <a href="{% url 'book:check' i.id %}"><button class="btn btn-outline-light">Check!</button></a>
+                        {% endif %}
+                        <a href="{% url 'book:delete' i.id %}"><button class="my-5 btn btn-outline-danger">Delete</button></a>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+
+</div>
+
+<style>
+
+    a{
+        text-decoration: none;
+    }
+</style>
+
+<script>
+    function create(){
+        var book_create = document.getElementById("book_create");
+        book_create.innerHTML = 
+        "<div class='row my-3'><div class='col-lg-3'><input value='site name' type='text' class='form-control' name='sname'></div> <div class='col-lg-8'><input value='site url' type='url' class='form-control' name='surl'></div><div class='col-lg-1'><button class='btn btn-outline-light'>+add</button></div></div>";
+    }
+</script>
+
+{% endblock %}  
