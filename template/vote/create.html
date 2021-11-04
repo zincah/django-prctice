@@ -1,0 +1,79 @@
+{% extends 'base.html' %}  
+
+
+{% block auth %}  
+
+<body style="color: whitesmoke;">
+    <div class="container my-5">
+        <div style="padding:10% 17%">
+            <div class="mb-5">
+                <h1>Create vote!</h1>
+            </div>
+            <div class="text-end">
+                <button class="btn btn-outline-light" type="button" onclick="sel()">+add</button>
+            </div>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="my-3">
+                    Topic : <input type="text" name="subject" class="form-control input"> 
+                </div>
+                <div class="my-3">
+                    Content : <textarea name="content" class="form-control input"></textarea>
+                </div>
+                <hr>
+
+                <div class="my-5" id="create_sel"></div>
+                
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button class="btn btn-outline-light">Create Topic!</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+
+
+</body>
+
+<script>
+    var num = 1;
+    function sel(){
+        var cre = document.getElementById("create_sel");
+        var div = document.createElement("div");
+        div.setAttribute("class", "row");
+        div.setAttribute("id", "del_sel"+num);
+        div.innerHTML = 
+        `<div class="col-lg-7">
+            Choice: <input type="text" class="form-control" name="select">
+        </div>
+        <div class="col-lg-4">
+            Picture: <input type="file" class="form-control" name="picture">
+        </div>
+        <div class="col-lg-1"><button class="btn btn-outline-light" type="button" onclick="del(`+num+`)" style="margin-top:23px;">Del</button></div>
+        `;
+        cre.appendChild(div);
+        num += 1;
+    }
+
+    function del(n){
+        var d = document.getElementById("del_sel"+n)
+        d.remove();
+    }
+    
+
+</script>
+
+<style>
+    .input{
+        background-color:rgba(245, 245, 245, 0); 
+        border:solid; 
+        border-color: rgba(245, 245, 245, 0.59); 
+        border-width: 1px;
+        color:whitesmoke;
+    }
+
+</style>
+
+
+{% endblock %}   
