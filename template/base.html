@@ -10,8 +10,11 @@
 
     <style>
         body{
-            background-color: rgb(0, 0, 0);
+
+            background-image: url('/media/base.jpg');
             font-family: Comic Sans MS;
+            background-size: cover;
+
         }
 
     </style>
@@ -32,6 +35,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{%url 'vote:index' %}">Vote</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{%url 'todo:index' %}">Todo</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{%url 'book:index' %}">Bookmark</a>

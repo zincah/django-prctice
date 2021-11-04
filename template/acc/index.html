@@ -2,7 +2,52 @@
 
 {% block noauth %}  
 
-<h1 style="color:whitesmoke;">index</h1>
+
+<body >
+
+    <div class="container my-5">
+        <div class="text-center" style="margin-top:20%; color:rgba(245, 245, 245, 0.789);">
+            <span id="clock" style="font-size: 150px;">00:00</span>
+            <span id="clock2" style="font-size: 50px;">:00</span>
+        </div>
+        <div class="my-5 text-center">
+            <h1>Who are U?</h1>
+        </div>
+        <div class="my-5 text-center">
+            <a href="{% url 'acc:userlogin' %}"><button class="btn btn-outline-light btn-lg">login</button></a>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    const clock = document.querySelector("span#clock");
+    const sec = document.querySelector("span#clock2")
+
+    function getClock() {
+        const time = new Date();
+        const hours = String(time.getHours()).padStart(2, "0");
+        const mins = String(time.getMinutes()).padStart(2, "0");
+        const secs = String(time.getSeconds()).padStart(2, "0");
+        clock.innerText = `${hours}:${mins}`;
+        clock2.innerText = `:${secs}`;
+    }
+
+    getClock();
+    setInterval(getClock, 1000);
+
+</script>
+
+<style>
+    body{
+
+        color:whitesmoke;
+        background-image: url('/media/moon.jpg');
+        background-size: cover;
+
+    }
+
+</style>
 
 
 {% endblock %}
@@ -10,7 +55,52 @@
 
 {% block auth %}  
 
-<h1 style="color:whitesmoke;">index</h1>
+
+
+<body >
+
+    <div class="container my-5">
+        <div class="text-center" style="margin-top:20%; color:rgba(245, 245, 245, 0.789);">
+            <span id="clock" style="font-size: 150px;">00:00</span>
+            <span id="clock2" style="font-size: 50px;">:00</span>
+        </div>
+
+        <div class="my-5 text-center">
+            <h1>{{user.username}}, Have a nice day ;)</h1>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    const clock = document.querySelector("span#clock");
+    const sec = document.querySelector("span#clock2")
+
+    function getClock() {
+        const time = new Date();
+        const hours = String(time.getHours()).padStart(2, "0");
+        const mins = String(time.getMinutes()).padStart(2, "0");
+        const secs = String(time.getSeconds()).padStart(2, "0");
+        clock.innerText = `${hours}:${mins}`;
+        clock2.innerText = `:${secs}`;
+    }
+
+    getClock();
+    setInterval(getClock, 1000);
+
+</script>
+
+<style>
+    body{
+
+        color: whitesmoke;
+        background-image: url('/media/moon.jpg');
+        background-size: cover;
+
+    }
+
+</style>
 
 
 {% endblock %}
+
