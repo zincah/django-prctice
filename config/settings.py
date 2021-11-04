@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'board.apps.BoardConfig',
     'book.apps.BookConfig',
     'vote.apps.VoteConfig',
+    'todo.apps.TodoConfig',
 
     'mathfilters',
 ]

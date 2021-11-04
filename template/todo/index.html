@@ -10,9 +10,98 @@
             <h1>Todo List</h1>
         </div>
 
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="my-3">
+                    <h4>My todo list</h4>
+                </div>
+                <div class="text-end">
+                    <button class="btn btn-outline-light" onclick="create()">+Add</button>
+                </div>
+                <form method="POST" action="{% url 'todo:create' %}">
+                    {% csrf_token %}
+                    <div id="cre_todo"></div>
+                </form>
+                {% for i in todo %}
+                    {% if user.username == i.writer %}
+                        <div class="card my-3" style="background-color: rgba(245, 245, 245, 0); border:1px solid rgba(255, 255, 255, 0.467);">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        {% if i.check == False %}
+                                            <a href="{% url 'todo:check' i.id %}"><button class="btn" style="background-color: rgba(245, 245, 245, 0);">✋</button></a> 
+                                        {% else %} 
+                                            <a href="{% url 'todo:uncheck' i.id %}"><button class="btn" style="background-color: rgba(245, 245, 245, 0);">🖐</button></a> 
+                                        {% endif %}
+                                        <span {% if i.check %}style="text-decoration: line-through;"{% endif %}>{{ i.todo }}</span>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <span style="font-size: smaller; margin-left:50px"># cheer : {{ i.cheer.all.count }}</span>
+                                        <a href="{% url 'todo:delete' i.id %}"><button class="btn" style="background-color: rgba(240, 248, 255, 0);">❌</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col-lg-6" style="border-left: 1px solid whitesmoke;">
+                <div class="my-3">
+                    <h4>people's todo list</h4>
+                </div>
+                <table class="table table-hover mt-5" style="color:whitesmoke;">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">todo</th>
+                        <th scope="col">writer</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in todo %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ i.todo }} {% if i.check %}✔{% endif %}</td>
+                            <td>{{ i.writer }}</td>
+                            <td>
+                                {% if not user.username == i.writer %}
+                                    {% if not user in i.cheer.all %}
+                                    <a href="{% url 'todo:cheer' i.id %}"><button class="btn btn-outline-light">Cheer!</button></a>
+                                    {% else %}
+                                    <a href="{% url 'todo:uncheer' i.id %}"><button class="btn btn-outline-dark">Cancel</button></a>
+                                    {% endif %}
+                                {% else %} 
+                                <a href="{% url 'todo:delete' i.id %}"><button class="btn btn-outline-danger">Delete</button></a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}  
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
 
 </body>
+
+<script>
+    function create(){
+        var cre = document.getElementById("cre_todo");
+        var div = document.createElement("div");
+        div.setAttribute("class", "row my-3");
+        div.innerHTML = `
+        <div class="col-lg-9">
+            <input name='todo' class="form-control">
+        </div>
+        <div class="col-lg-3">
+            <button class="btn btn-outline-light">post!</button>
+        </div>
+        `;
+        cre.appendChild(div);
+    }
+</script>
 
 
 <style>
