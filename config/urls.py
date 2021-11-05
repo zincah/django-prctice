@@ -25,5 +25,6 @@ urlpatterns = [
     path('vote/', include('vote.urls')),
     path('book/', include('book.urls')),
     path('todo/', include('todo.urls')),
+    path('trans/', include('trans.urls')),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

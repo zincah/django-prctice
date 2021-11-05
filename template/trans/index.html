@@ -1,0 +1,159 @@
+{% extends 'base.html' %}  
+
+
+{% block auth %}  
+
+<body>
+<div class="container my-5">
+    <div>
+        <h1>Translator</h1>
+    </div>
+    <div class="mb-3 text-end">
+        <button class="btn btn-outline-light">Home</button>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>Before</h3>
+                <select name="before" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                    <option value="ko" {% if b == "ko" or not b %}selected{% endif %}>Korean</option>
+                    <option value="en" {% if b == "en" %}selected{% endif %}>english</option>
+                    <option value="zh-cn" {% if b == "zh-cn" %}selected{% endif %}>chines</option>
+                    <option value="ja" {% if b == "ja" %}selected{% endif %}>japanese</option>
+                    <option value="ru" {% if b == "ru" %}selected{% endif %}>russian</option>
+                    <option value="th" {% if b == "th" %}selected{% endif %}>thai</option>
+                    <option value="vi" {% if b == "vi" %}selected{% endif %}>vietnamese</option>
+                    <option value="es" {% if b == "es" %}selected{% endif %}>spanish</option>
+                </select>
+                <textarea name="btext" class="form-control" style="height: 400px; background-color:rgba(255, 255, 255, 0.387); font-weight: bold;">{{ bt }}</textarea>
+                <div class="text-end mt-3">
+                    <button class="btn btn-outline-light">Trans!</button>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h3>After</h3>
+                <select name="after" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                    <option value="ko" {% if a == "ko" %}selected{% endif %}>Korean</option>
+                    <option value="en" {% if a == "en" or not a%}selected{% endif %}>english</option>
+                    <option value="zh-cn" {% if a == "zh-cn" %}selected{% endif %}>chines</option>
+                    <option value="ja" {% if a == "ja" %}selected{% endif %}>japanese</option>
+                    <option value="ru" {% if a == "ru" %}selected{% endif %}>russian</option>
+                    <option value="th" {% if a == "th" %}selected{% endif %}>thai</option>
+                    <option value="vi" {% if a == "vi" %}selected{% endif %}>vietnamese</option>
+                    <option value="es" {% if a == "es" %}selected{% endif %}>spanish</option>
+                </select>
+                <textarea id="copy_text" name="atext" class="form-control" style="height: 400px; background-color:rgba(255, 255, 255, 0.387); font-weight: bold;">{{ at }}</textarea>
+                <div class="text-end mt-3">
+                    <button class="btn btn-outline-light" type="button" onclick="copy()">Copy</button>
+                    <a href="{% url 'trans:index' %}"><button class="btn btn-outline-light" type="button">Reset</button></a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+</div>
+</body>
+
+<style>
+    body{
+        color:whitesmoke;
+    }
+
+
+</style>
+
+<!-- 텍스트 복사 -->
+<script>
+    function copy(){
+        const textArea = document.getElementById("copy_text")
+        textArea.select();
+        document.execCommand('copy');
+    }
+
+
+    
+</script>
+
+
+
+{% endblock %}   
+
+{% block noauth %}  
+
+<body>
+    <div class="container my-5">
+        <div>
+            <h1>Translator</h1>
+        </div>
+        <div class="mb-3 text-end">
+            <button class="btn btn-outline-light">Home</button>
+        </div>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-lg-6">
+                    <h3>Before</h3>
+                    <select name="before" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                        <option value="ko" {% if b == "ko" or not b %}selected{% endif %}>Korean</option>
+                        <option value="en" {% if b == "en" %}selected{% endif %}>english</option>
+                        <option value="zh-cn" {% if b == "zh-cn" %}selected{% endif %}>chines</option>
+                        <option value="ja" {% if b == "ja" %}selected{% endif %}>japanese</option>
+                        <option value="ru" {% if b == "ru" %}selected{% endif %}>russian</option>
+                        <option value="th" {% if b == "th" %}selected{% endif %}>thai</option>
+                        <option value="vi" {% if b == "vi" %}selected{% endif %}>vietnamese</option>
+                        <option value="es" {% if b == "es" %}selected{% endif %}>spanish</option>
+                    </select>
+                    <textarea name="btext" class="form-control" style="height: 400px; background-color:rgba(255, 255, 255, 0.387); font-weight: bold;">{{ bt }}</textarea>
+                    <div class="text-end mt-3">
+                        <button class="btn btn-outline-light">Trans!</button>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h3>After</h3>
+                    <select name="after" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                        <option value="ko" {% if a == "ko" %}selected{% endif %}>Korean</option>
+                        <option value="en" {% if a == "en" or not a%}selected{% endif %}>english</option>
+                        <option value="zh-cn" {% if a == "zh-cn" %}selected{% endif %}>chines</option>
+                        <option value="ja" {% if a == "ja" %}selected{% endif %}>japanese</option>
+                        <option value="ru" {% if a == "ru" %}selected{% endif %}>russian</option>
+                        <option value="th" {% if a == "th" %}selected{% endif %}>thai</option>
+                        <option value="vi" {% if a == "vi" %}selected{% endif %}>vietnamese</option>
+                        <option value="es" {% if a == "es" %}selected{% endif %}>spanish</option>
+                    </select>
+                    <textarea id="copy_text" name="atext" class="form-control" style="height: 400px; background-color:rgba(255, 255, 255, 0.387); font-weight: bold;">{{ at }}</textarea>
+                    <div class="text-end mt-3">
+                        <button class="btn btn-outline-light" type="button" onclick="copy()">Copy</button>
+                        <a href="{% url 'trans:index' %}"><button class="btn btn-outline-light" type="button">Reset</button></a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    
+    
+    </div>
+    </body>
+    
+    <style>
+        body{
+            color:whitesmoke;
+        }
+    
+    
+    </style>
+    
+    <!-- 텍스트 복사 -->
+    <script>
+        function copy(){
+            const textArea = document.getElementById("copy_text")
+            textArea.select();
+            document.execCommand('copy');
+        }
+    
+    
+        
+    </script>
+    
+
+{% endblock %}
