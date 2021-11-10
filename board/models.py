@@ -36,4 +36,7 @@ class Reply(models.Model):
     def __str__(self):
         return self.replyer
 
-   
+class Scrap(models.Model):
+    bo = models.ForeignKey(Board, on_delete=models.CASCADE)
+    scrap = models.ManyToManyField(User, blank=True)
+

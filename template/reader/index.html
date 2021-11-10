@@ -71,3 +71,76 @@
 
 
 {% endblock %}  
+
+{% block noauth %}  
+
+
+<body>
+
+    <div class="container my-5">
+        <div>
+            <h1>Pdf Reader</h1>
+        </div>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+    
+            <div class="row my-5">
+                <div class="col-lg-10">
+                    <input name="pfile" onchange="checkFile(this)" type="file" class="form-control" style="background-color: rgba(245, 245, 245, 0.494);">
+                </div>
+                <div class="col-lg-2">
+                    <button class="btn btn-outline-light">Submit</button>
+                </div>
+            </div>
+    
+            <div>
+                <textarea id="copy_text" class="area form-control">{{ text }}</textarea>
+            </div>
+            <div class="text-end my-3">
+                <button type="button" class="btn btn-outline-light" onclick="copy()">copy!</button>
+                <a href="{% url 'reader:index' %}"><button type="button" class="btn btn-outline-light">Reset</button></a>
+                <a href="{% url 'acc:index' %}"><button type="button" class="btn btn-outline-light">Home</button></a>
+            </div>
+    
+    
+        </form>
+    
+    
+    
+    </div>
+    
+    </body>
+    
+    
+    <script>
+        function copy(){
+            const textArea = document.getElementById("copy_text");
+            textArea.select(); 
+            document.execCommand('copy');
+        }
+    
+        function checkFile(f){
+            var file = f.files;
+            // 밑에 구문을 잘 모르겠음 정규식으로 파일 확장자 체크
+            if(!/\.(pdf)$/i.test(file[0].name)) {
+            alert('pdf 파일만 선택해 주세요.\n\n현재 파일 : ' + file[0].name);
+            location.href="{% url 'reader:index' %}";
+            }
+            else return;
+        }
+    
+    </script>
+    
+    <style>
+        body{
+            color:whitesmoke;
+        }
+    
+        .area{
+            height:500px;
+            background-color: rgba(245, 245, 245, 0.241);
+        }
+    </style>
+
+
+{% endblock %}

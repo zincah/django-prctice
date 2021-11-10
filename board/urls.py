@@ -12,5 +12,6 @@ urlpatterns = [
     path('modify/<bpk>', views.modify, name="modify"),
     path('addlike/<bpk>', views.addlike, name="addlike"),
     path('dellike/<bpk>', views.dellike, name="dellike"),
+    path('scraps/<bpk>', views.scraps, name="scraps"),
 
 ]

@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.utils import timezone
 from django.core.paginator import Paginator
 
-from .models import Board, Reply
+from .models import Board, Reply, Scrap
 from acc.models import User
 
 
@@ -24,9 +24,11 @@ def index(request):
 def detail(request, bpk):
     b = Board.objects.get(id=bpk)
     r = b.reply_set.all()
+    s = b.scrap_set.all()
     context = {
         "bo" : b,
         "rep" : r,
+        "sc" : s,
     }
     return render(request, "board/detail.html", context)
 
@@ -80,4 +82,12 @@ def addlike(request, bpk):
 def dellike(request, bpk):
     b = Board.objects.get(id=bpk)
     b.like.remove(request.user)
+    return redirect("board:detail", bpk=bpk)
+
+def scraps(request, bpk):
+    b = Board.objects.get(id=bpk)
+    s = Scrap(bo=b)
+    s.save()
+    if not request.user in s.scrap.all():
+        s.scrap.add(request.user)
     return redirect("board:detail", bpk=bpk)
