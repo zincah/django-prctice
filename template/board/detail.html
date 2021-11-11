@@ -52,7 +52,7 @@
                     <a href="{% url 'board:modify' bo.id %}"><button class="btn btn-outline-light">Modify</button></a>
                     <a href="{% url 'board:delete' bo.id %}"><button class="btn btn-outline-danger">Delete</button></a>
                     {% else %}
-                    <a href="{% url 'board:scraps' bo.id %}"><button class="btn btn-outline-light">+Scrap</button></a>
+                        <a href="#"><button class="btn btn-outline-light">+Scrap</button></a>
                     {% endif %}
                     <a href="{% url 'board:index' %}"><button class="btn btn-outline-light">Back</button></a>
                 </div>
