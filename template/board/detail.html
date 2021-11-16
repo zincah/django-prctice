@@ -52,7 +52,10 @@
                     <a href="{% url 'board:modify' bo.id %}"><button class="btn btn-outline-light">Modify</button></a>
                     <a href="{% url 'board:delete' bo.id %}"><button class="btn btn-outline-danger">Delete</button></a>
                     {% else %}
-                        <a href="#"><button class="btn btn-outline-light">+Scrap</button></a>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            +Scrap
+                        </button>
                     {% endif %}
                     <a href="{% url 'board:index' %}"><button class="btn btn-outline-light">Back</button></a>
                 </div>
@@ -107,8 +110,40 @@
 
     </div>
 
+    
+    <!-- Modal -->
+    <form method="POST" action="{% url 'mypage:scrap' bo.id %}">
+        {% csrf_token %}
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color: black;">if you wanna scrap pls write a comment.</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="color: black;">
+                    <input type="text" class="form-control" name="comment">
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button class="btn btn-success">Add scrap</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </form>
+
 </body>
+
+
+
+
 
 {% endblock %} 
 
 🖤
+
+
+
+
+  

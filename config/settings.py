@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'book.apps.BookConfig',
     'vote.apps.VoteConfig',
     'todo.apps.TodoConfig',
+    'mypage.apps.MypageConfig',
 
     'mathfilters',
 ]

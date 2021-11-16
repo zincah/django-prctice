@@ -4,5 +4,7 @@ from . import views
 app_name = "mypage"
 urlpatterns = [
     path('', views.index, name="index"),
+    path('scrap/<bpk>', views.scrap, name="scrap"),
+    
     
 ] 

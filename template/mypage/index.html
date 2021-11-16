@@ -37,16 +37,21 @@
                         <thead>
                           <tr>
                             <th scope="col">#</th>
-                            <th scope="col">subject</th>
+                            <th scope="col">Comment</th>
                             <th scope="col"></th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                          </tr>
+                            {% for i in scrap %}
+                                {% if request.user.username == i.user.username %}
+                                <tr>
+                                    <th scope="row">{{ forloop.counter }}</th>
+                                    <td>{{ i.comment }}</td>
+                                    <td><a href="/boarddetail/{{i.site_url}}"><button class="btn btn-outline-light">Go</button></a></td>
+                                </tr>
+                                {% endif %}
+                            {% endfor %}
+
                         </tbody>
                       </table>
                 </div>
