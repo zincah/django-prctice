@@ -1,0 +1,31 @@
+{% extends 'base.html' %}  
+
+{% block auth %}  
+
+<body style="color:whitesmoke;">
+    <div class="container my-5">
+        <div>
+            <h1>Add a memo ;)</h1>
+        </div>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="my-5">
+                subject : <input type="text" class="form-control" name="subject" style="background-color: rgba(245, 245, 245, 0.156); color:whitesmoke;">
+            </div>
+            <div class="my-5">
+                Content : <textarea class="form-control" name="content" style="height: 300px; background-color: rgba(245, 245, 245, 0.156); color:whitesmoke;"></textarea>
+            </div>
+            <div class="text-end my-5">
+                <button class="btn btn-outline-light">+add</button>
+                <a href="{% url 'mypage:index' %}"><button type="button" class="btn btn-outline-light">Back</button></a>
+            </div>
+        </form>
+
+
+    </div>
+</body>
+
+
+
+
+{% endblock %}

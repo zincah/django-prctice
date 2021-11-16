@@ -47,16 +47,40 @@
                                 <tr>
                                     <th scope="row">{{ forloop.counter }}</th>
                                     <td>{{ i.comment }}</td>
-                                    <td><a href="/boarddetail/{{i.site_url}}"><button class="btn btn-outline-light">Go</button></a></td>
+                                    <td style="text-align: right;"><a href="/boarddetail/{{i.site_url}}"><button class="btn btn-outline-light">Go</button></a></td>
                                 </tr>
                                 {% endif %}
                             {% endfor %}
-
                         </tbody>
+
                       </table>
                 </div>
                 <div>
                     <h3>Memo ;)</h3>
+                        <div class="text-end">
+                            <a href="{% url 'mypage:memoadd' %}"><button class="btn btn-outline-light">+add</button></a>
+                        </div>
+                        <table class="table table-hover my-5" style="color:whitesmoke;">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Memo</th>
+                                <th scope="col"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in memo %}
+                                    {% if request.user == i.user %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td><a href="{% url 'mypage:memodetail' i.id %}">{{ i.subject }}</a></td>
+                                        <td style="text-align: right;"><button class="btn btn-outline-warning">☆</button></td>
+                                    </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            </tbody>
+
+                        </table>
                 </div>
             </div>
         </div>
@@ -69,6 +93,11 @@
 
 <style>
     body{
+        color:whitesmoke;
+    }
+
+    a{
+        text-decoration: none;
         color:whitesmoke;
     }
 </style>

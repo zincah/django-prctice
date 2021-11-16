@@ -14,3 +14,12 @@ class Scrap(models.Model):
         return self.comment
     
     
+class Memo(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    subject = models.CharField(max_length=100)
+    content = models.TextField()
+    mtime = models.DateTimeField()
+    impo = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return self.subject

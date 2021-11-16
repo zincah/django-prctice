@@ -1,0 +1,28 @@
+{% extends 'base.html' %}  
+
+
+{% block auth %}  
+
+<body style="color:whitesmoke;">
+    <div class="container my-5">
+        <div class="my-5">
+            <h1>{{ memo.subject }}</h1>
+        </div>
+        <div class="my-5">
+            Content : <textarea class="form-control" name="content" style="height: 300px; background-color: rgba(245, 245, 245, 0.156); color:whitesmoke;" disabled>{{ memo.content }}</textarea>
+        </div>
+        <div class="text-end my-5">
+            <a href="{% url 'mypage:memomodify' memo.id %}"><button class="btn btn-outline-light">modify</button></a>
+            <a href="{% url 'mypage:index' %}"><button class="btn btn-outline-light">Back</button></a>
+        </div>
+
+
+   </div>
+</body>
+
+
+
+
+
+
+{% endblock %}
