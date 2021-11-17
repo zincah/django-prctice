@@ -63,3 +63,27 @@ def memomodify(request, mpk):
         return redirect("mypage:memodetail", mpk=mpk)
     return render(request, "mypage/memomodify.html", context)
 
+def memodelete(request, mpk):
+    m = Memo.objects.get(id=mpk)
+    m.delete()
+    return redirect("mypage:index")
+
+def impo(request, mpk):
+    m = Memo.objects.get(id=mpk)
+    if m.impo == False:
+        m.impo = True
+        m.save()
+    return redirect("mypage:index")
+
+def unimpo(request, mpk):
+    m = Memo.objects.get(id=mpk)
+    if m.impo == True:
+        m.impo = False
+        m.save()
+    return redirect("mypage:index")
+
+def scrapdel(request, spk):
+    s = Scrap.objects.get(id=spk)
+    if request.user == s.user:
+        s.delete()
+    return redirect("mypage:index")

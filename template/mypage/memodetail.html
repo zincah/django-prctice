@@ -13,6 +13,7 @@
         </div>
         <div class="text-end my-5">
             <a href="{% url 'mypage:memomodify' memo.id %}"><button class="btn btn-outline-light">modify</button></a>
+            <a href="{% url 'mypage:memodelete' memo.id %}"><button class="btn btn-outline-light">delete</button></a>
             <a href="{% url 'mypage:index' %}"><button class="btn btn-outline-light">Back</button></a>
         </div>
 

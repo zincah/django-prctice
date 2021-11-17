@@ -47,7 +47,10 @@
                                 <tr>
                                     <th scope="row">{{ forloop.counter }}</th>
                                     <td>{{ i.comment }}</td>
-                                    <td style="text-align: right;"><a href="/boarddetail/{{i.site_url}}"><button class="btn btn-outline-light">Go</button></a></td>
+                                    <td style="text-align: right;">
+                                        <a href="/boarddetail/{{i.site_url}}"><button class="btn btn-outline-light">Go</button></a>
+                                        <a href="{% url 'mypage:scrapdel' i.id %}"><button class="btn btn-outline-danger">Del</button></a>
+                                    </td>
                                 </tr>
                                 {% endif %}
                             {% endfor %}
@@ -74,7 +77,13 @@
                                     <tr>
                                         <td>{{ forloop.counter }}</td>
                                         <td><a href="{% url 'mypage:memodetail' i.id %}">{{ i.subject }}</a></td>
-                                        <td style="text-align: right;"><button class="btn btn-outline-warning">☆</button></td>
+                                        <td style="text-align: right;">
+                                            {% if i.impo == False %}
+                                                <a href="{% url 'mypage:impo' i.id %}"><button class="btn btn-outline-warning">☆</button></a>
+                                            {% else %}  
+                                                <a href="{% url 'mypage:unimpo' i.id %}"><button class="btn btn-warning">★</button></a>
+                                            {% endif %}
+                                        </td>
                                     </tr>
                                     {% endif %}
                                 {% endfor %}
