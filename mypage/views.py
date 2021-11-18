@@ -3,20 +3,24 @@ from acc.models import User
 from board.models import Board
 from .models import Scrap, Memo
 from django.utils import timezone
+from django.core.paginator import Paginator
 
 
 # Create your views here.
 
 def index(request):
     b = Board.objects.all()
-    s = Scrap.objects.all()
-    m = Memo.objects.all()
-    s = s.order_by('-stime')
+    s = request.user.scrap_set.all()
+    mpage = request.GET.get("page", 1)
+    m = request.user.memo_set.all()
     m = m.order_by('-mtime')
+    pag = Paginator(m, 5)
+    obj = pag.get_page(mpage)
+    s = s.order_by('-stime')
     context = {
         "myb" : b,
         "scrap" : s,
-        "memo" : m,
+        "memo" : obj,
     }
     return render(request, "mypage/index.html", context)
 

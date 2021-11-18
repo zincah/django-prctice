@@ -1,7 +1,6 @@
 {% extends 'base.html' %}  
-
-
 {% block auth %}  
+{% load mathfilters %}
 
 <body>
 
@@ -43,7 +42,7 @@
                         </thead>
                         <tbody>
                             {% for i in scrap %}
-                                {% if request.user.username == i.user.username %}
+
                                 <tr>
                                     <th scope="row">{{ forloop.counter }}</th>
                                     <td>{{ i.comment }}</td>
@@ -52,7 +51,7 @@
                                         <a href="{% url 'mypage:scrapdel' i.id %}"><button class="btn btn-outline-danger">Del</button></a>
                                     </td>
                                 </tr>
-                                {% endif %}
+
                             {% endfor %}
                         </tbody>
 
@@ -60,36 +59,55 @@
                 </div>
                 <div>
                     <h3>Memo ;)</h3>
-                        <div class="text-end">
-                            <a href="{% url 'mypage:memoadd' %}"><button class="btn btn-outline-light">+add</button></a>
-                        </div>
-                        <table class="table table-hover my-5" style="color:whitesmoke;">
-                            <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Memo</th>
-                                <th scope="col"></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                {% for i in memo %}
-                                    {% if request.user == i.user %}
-                                    <tr>
-                                        <td>{{ forloop.counter }}</td>
-                                        <td><a href="{% url 'mypage:memodetail' i.id %}">{{ i.subject }}</a></td>
-                                        <td style="text-align: right;">
-                                            {% if i.impo == False %}
-                                                <a href="{% url 'mypage:impo' i.id %}"><button class="btn btn-outline-warning">☆</button></a>
-                                            {% else %}  
-                                                <a href="{% url 'mypage:unimpo' i.id %}"><button class="btn btn-warning">★</button></a>
-                                            {% endif %}
-                                        </td>
-                                    </tr>
-                                    {% endif %}
-                                {% endfor %}
-                            </tbody>
+                    <div class="text-end">
+                        <a href="{% url 'mypage:memoadd' %}"><button class="btn btn-outline-light">+add</button></a>
+                    </div>
+                    <table class="table table-hover my-3" style="color:whitesmoke;">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Memo</th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in memo %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td><a href="{% url 'mypage:memodetail' i.id %}">{{ i.subject }}</a></td>
+                                    <td style="text-align: right;">
+                                        {% if i.impo == False %}
+                                            <a href="{% url 'mypage:impo' i.id %}"><button class="btn btn-outline-warning">☆</button></a>
+                                        {% else %}  
+                                            <a href="{% url 'mypage:unimpo' i.id %}"><button class="btn btn-warning">★</button></a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="my-5">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-end">
 
-                        </table>
+                                {% if memo.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link"href="{% url 'mypage:index' %}?page={{memo.previous_page_number}}">Previous</a>
+                                    </li>
+                                {% endif %} 
+
+                                {% for i in memo.paginator.page_range %}
+                                    <li class="page-item"><a class="page-link" href="{% url 'mypage:index' %}?page={{i}}">{{i}}</a></li>
+                                {% endfor %} 
+
+                                {% if memo.has_next %} 
+                                    <li class="page-item">
+                                        <a class="page-link" href="{% url 'mypage:index' %}?page={{memo.next_page_number}}">Next</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>
@@ -108,6 +126,12 @@
     a{
         text-decoration: none;
         color:whitesmoke;
+    }
+
+    .page-link{
+        background-color: rgba(245, 245, 245, 0.571);
+        color:black;
+        border: 1px solid rgba(0, 0, 0, 0.639);
     }
 </style>
 
